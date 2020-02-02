@@ -18,8 +18,7 @@
   "author": "Bunlong",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.41.2",
-    "react-native-windows": "0.41.0-rc.1"
+    "react-native": "^0.61.5"
   },
   "dependencies": {
     "prop-types": "^15.6.2"
