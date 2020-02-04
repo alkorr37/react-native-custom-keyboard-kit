@@ -3,19 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "android": "react-native run-android",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.3",
-    "react-native-custom-keyboard-kit": "^1.0.2"
-  },
-  "devDependencies": {
-    "babel-jest": "23.6.0",
-    "jest": "23.6.0",
-    "metro-react-native-babel-preset": "0.48.1",
-    "react-test-renderer": "16.6.0-alpha.8af6728"
+    "react-native": "0.61.5",
+    "react-native-custom-keyboard-kit": "alkorr37/react-native-custom-keyboard-kit#master"
   },
   "jest": {
     "preset": "react-native"

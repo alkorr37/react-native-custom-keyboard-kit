@@ -8,4 +8,3 @@
 @interface RNCustomKeyboardKit : NSObject <RCTBridgeModule>
 
 @end
-  

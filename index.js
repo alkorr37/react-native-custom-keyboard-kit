@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-
-import PropTypes from 'prop-types';
+import React, { Component, useEffect, useRef } from 'react';
 
 import {
   NativeModules,
@@ -8,7 +6,6 @@ import {
   findNodeHandle,
   AppRegistry,
   View,
-  Text,
 } from 'react-native';
 
 const { CustomKeyboardKit} = NativeModules;
@@ -50,32 +47,16 @@ class CustomKeyboardKitContainer extends Component {
 
 AppRegistry.registerComponent("CustomKeyboardKit", () => CustomKeyboardKitContainer);
 
-export class CustomTextInput extends Component {
-  static propTypes = {
-    ...TextInput.propTypes,
-    customKeyboardType: PropTypes.string,
-  }
+export const CustomTextInput = ({customKeyboardType, ...others}) => {
+  const ref = useRef(null);
 
-  componentDidMount() {
-    install(findNodeHandle(this.input), this.props.customKeyboardType);
-  }
+  useEffect(() => {
+    install(findNodeHandle(ref.current), customKeyboardType);
+  }, [customKeyboardType]);
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.customKeyboardType !== this.props.customKeyboardType) {
-      install(findNodeHandle(this.input), newProps.customKeyboardType);
-    }
-  }
-
-  onRef = ref => {
-    this.input = ref;
-  }
-
-  render() {
-    const { customKeyboardType, ...others } = this.props;
-    return (
+  return (
       <View>
-        <TextInput {...others} ref={this.onRef} />
+        <TextInput {...others} ref={ref} />
       </View>
-    );
-  }
-}
+  );
+};

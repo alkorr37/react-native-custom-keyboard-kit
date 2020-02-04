@@ -4,7 +4,9 @@
   "description": "React Native Custom Keyboard - Use your own custom keyboard instead of the system keyboard with React Native Custom Keyboard Kit.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "postinstall": "node --experimental-modules ./scripts/postinstall.mjs"
   },
   "keywords": [
     "react-native",
@@ -22,6 +24,9 @@
   },
   "dependencies": {
     "prop-types": "^15.6.2"
+  },
+  "devDependencies": {
+      "react-native": "^0.61.5"
   },
   "bugs": {
     "url": "https://github.com/themodernjavascript/react-native-custom-keyboard-kit/issues"
