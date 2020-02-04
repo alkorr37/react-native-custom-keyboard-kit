@@ -45,7 +45,10 @@ RCT_EXPORT_METHOD(uninstall:(nonnull NSNumber *)reactTag)
 RCT_EXPORT_METHOD(replaceText:(nonnull NSNumber *)reactTag withText:(NSString*)text) {
   RCTSinglelineTextInputView *inputView = (RCTSinglelineTextInputView*)[_bridge.uiManager viewForReactTag:reactTag];
   UITextField* view = (UITextField *)inputView.backedTextInputView;
-  [view replaceRange:view.selectedTextRange withText:text];
+  
+  UITextRange* range = [view textRangeFromPosition:[view beginningOfDocument] toPosition:[view endOfDocument]];
+
+  [view replaceRange:range withText:text];
 }
 
 RCT_EXPORT_METHOD(insertText:(nonnull NSNumber *)reactTag withText:(NSString*)text) {
