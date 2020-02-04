@@ -167,6 +167,25 @@ public class RNCustomKeyboardKitModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void replaceText(final int tag, final String text) {
+    UiThreadUtil.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        final Activity activity = getCurrentActivity();
+        final ReactEditText edit = getEditById(tag);
+        if (edit == null) {
+          return;
+        }
+
+        int start = Math.max(edit.getSelectionStart(), 0);
+        int end = Math.max(edit.getSelectionEnd(), 0);
+        edit.getText().replace(0, edit.length(),
+                text, 0, text.length());
+      }
+    });
+  }
+
+  @ReactMethod
   public void insertText(final int tag, final String text) {
     UiThreadUtil.runOnUiThread(new Runnable() {
       @Override
@@ -307,7 +326,7 @@ public class RNCustomKeyboardKitModule extends ReactContextBaseJavaModule {
         if (edit == null) {
           return;
         }
-        
+
         View keyboard = (View)edit.getTag(TAG_ID);
         if (keyboard.getParent() != null) {
           ((ViewGroup) keyboard.getParent()).removeView(keyboard);
