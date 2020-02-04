@@ -4,9 +4,7 @@
   "description": "React Native Custom Keyboard - Use your own custom keyboard instead of the system keyboard with React Native Custom Keyboard Kit.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-
-    "postinstall": "node --experimental-modules ./scripts/postinstall.mjs"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "react-native",
