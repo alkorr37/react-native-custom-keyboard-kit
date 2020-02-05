@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNCustomKeyboardKit"
-  s.version      = "1.0.0"
+  s.version      = "1.0.3"
   s.summary      = "RNCustomKeyboardKit"
   s.description  = <<-DESC
                   RNCustomKeyboardKit
@@ -21,4 +21,3 @@ Pod::Spec.new do |s|
 
 end
 
-  
