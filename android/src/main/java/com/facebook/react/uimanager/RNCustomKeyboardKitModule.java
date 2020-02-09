@@ -2,6 +2,7 @@
 package com.facebook.react.uimanager;
 
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
@@ -28,9 +29,11 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.RootView;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.UIViewOperationQueue;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.textinput.ReactEditText;
 
 public class RNCustomKeyboardKitModule extends ReactContextBaseJavaModule {
@@ -130,7 +133,7 @@ public class RNCustomKeyboardKitModule extends ReactContextBaseJavaModule {
                                             activity.addContentView(keyboard, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                                         }
                                     }
-                                }, 100);
+                                }, 150);
                             }
                         });
                     }
@@ -176,6 +179,15 @@ public class RNCustomKeyboardKitModule extends ReactContextBaseJavaModule {
                 edit.setTag(TAG_ID, null);
             }
         });
+    }
+
+    @ReactMethod
+    public void kbChange(final int tag, final String text) {
+        WritableMap event = Arguments.createMap();
+        event.putString("text", text);
+        ReactContext reactContext = this.getReactApplicationContext();
+        reactContext.getJSModule(RCTEventEmitter.class).
+                receiveEvent(tag, "topChange", event);
     }
 
     @ReactMethod

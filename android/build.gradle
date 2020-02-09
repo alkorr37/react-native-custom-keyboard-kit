@@ -1,4 +1,6 @@
-
+ext {
+    var = '+'
+}
 buildscript {
     repositories {
         google()
@@ -6,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:3.4.2")
+        classpath('com.android.tools.build:gradle:3.5.3')
     }
 }
 
@@ -17,11 +19,27 @@ android {
     buildToolsVersion "28.0.3"
 
     defaultConfig {
-        minSdkVersion = 16
-        targetSdkVersion = 28
+        minSdkVersion 16
+        targetSdkVersion 28
     }
 }
 
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
+    implementation "com.facebook.react:react-native:${var}"
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url("$rootDir/../node_modules/react-native/android")
+    }
+    maven {
+        // Android JSC is installed from npm
+        url("$rootDir/../node_modules/jsc-android/dist")
+    }
+
+    google()
+    jcenter()
+    maven { url 'https://jitpack.io' }
 }
