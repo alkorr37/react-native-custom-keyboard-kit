@@ -87,11 +87,15 @@ public class RNCustomKeyboardKitModule extends ReactContextBaseJavaModule {
                 }
 
                 edit.setTag(TAG_ID, createCustomKeyboardKit(activity, tag, type));
-
                 edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(final View v, boolean hasFocus) {
+                        WritableMap event = Arguments.createMap();
+                        ReactContext reactContext = getReactApplicationContext();
                         if (hasFocus) {
+                            reactContext.getJSModule(RCTEventEmitter.class).
+                                    receiveEvent(tag, "topFocus", event);
+
                             UiThreadUtil.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -105,10 +109,12 @@ public class RNCustomKeyboardKitModule extends ReactContextBaseJavaModule {
                                                 activity.addContentView(keyboard, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                                             }
                                         }
-                                    }, 100);
+                                    }, 150);
                                 }
                             });
                         } else {
+                            reactContext.getJSModule(RCTEventEmitter.class).
+                                    receiveEvent(tag, "topBlur", event);
                             View keyboard = (View) edit.getTag(TAG_ID);
                             if (keyboard.getParent() != null) {
                                 ((ViewGroup) keyboard.getParent()).removeView(keyboard);
