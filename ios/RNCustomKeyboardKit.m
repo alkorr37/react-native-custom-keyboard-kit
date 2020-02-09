@@ -42,6 +42,13 @@ RCT_EXPORT_METHOD(uninstall:(nonnull NSNumber *)reactTag)
   [view reloadInputViews];
 }
 
+RCT_EXPORT_METHOD(kbChange:(nonnull NSNumber *)reactTag text:(NSString*)text) {
+    RCTSinglelineTextInputView *inputView = (RCTSinglelineTextInputView*)[_bridge.uiManager viewForReactTag:reactTag];
+    inputView.onChange(@{
+      @"text": text
+    });
+}
+
 RCT_EXPORT_METHOD(replaceText:(nonnull NSNumber *)reactTag withText:(NSString*)text) {
   RCTSinglelineTextInputView *inputView = (RCTSinglelineTextInputView*)[_bridge.uiManager viewForReactTag:reactTag];
   UITextField* view = (UITextField *)inputView.backedTextInputView;
