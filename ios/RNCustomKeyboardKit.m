@@ -45,7 +45,8 @@ RCT_EXPORT_METHOD(uninstall:(nonnull NSNumber *)reactTag)
 RCT_EXPORT_METHOD(kbChange:(nonnull NSNumber *)reactTag text:(NSString*)text) {
     RCTSinglelineTextInputView *inputView = (RCTSinglelineTextInputView*)[_bridge.uiManager viewForReactTag:reactTag];
     inputView.onChange(@{
-      @"text": text
+      @"text": text,
+      @"eventCount": [NSNumber numberWithInt:inputView.nativeEventCount]
     });
 }
 
